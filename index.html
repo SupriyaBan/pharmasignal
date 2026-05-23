@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PharmaSignal - AI Brand Intelligence Copilot synthesising competitive intelligence signals from clinical trials, medical literature, and industry news for top pharma brand teams.">
+    <title>PharmaSignal | AI Brand Intelligence Copilot</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- SIDEBAR PANEL -->
+    <aside>
+        <div class="sidebar-content">
+            <!-- Brand Logo -->
+            <div class="brand">
+                <div class="brand-logo">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4.5 10.5C3.67 10.5 3 11.17 3 12s.67 1.5 1.5 1.5h15c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5h-15z M10.5 4.5C10.5 3.67 11.17 3 12 3s1.5.67 1.5 1.5v15c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5v-15z M6.06 6.06C5.48 6.64 5.48 7.58 6.06 8.16s1.52.58 2.1 0 1.52-.94 2.1-1.52c.58-.58.58-1.52 0-2.1s-1.52-.58-2.1 0L6.06 6.06z M13.74 13.74c-.58.58-.58 1.52 0 2.1s1.52.58 2.1 0 1.52-.94 2.1-1.52c.58-.58.58-1.52 0-2.1s-1.52-.58-2.1 0l-2.1 2.1z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="brand-title">PharmaSignal</h1>
+                    <p class="brand-tagline">AI Commercial Copilot</p>
+                </div>
+            </div>
+
+            <!-- History List Section -->
+            <div class="sidebar-section">
+                <h2 class="sidebar-label">Saved Briefs</h2>
+                <div class="history-list" id="history-container">
+                    <div class="no-history">No history saved yet. Run a search to save a brief.</div>
+                </div>
+            </div>
+
+            <!-- Settings / Keys Section -->
+            <div class="sidebar-section" style="margin-top: auto;">
+                <h2 class="sidebar-label">AI Configuration</h2>
+                
+                <div class="form-group-sidebar">
+                    <label for="gemini-key">Gemini API Key</label>
+                    <input type="password" id="gemini-key" class="sidebar-input" placeholder="Paste your API key here..." autocomplete="current-password">
+                    <p style="font-size: 0.65rem; color: var(--text-muted); margin-top: 4px; line-height: 1.3;">
+                        API key is saved locally in your browser. Leave blank to run in <strong>Demo/Offline Mode</strong>.
+                    </p>
+                </div>
+
+                <div class="form-group-sidebar">
+                    <label for="gemini-model">AI Model Selection</label>
+                    <select id="gemini-model" class="sidebar-select">
+                        <option value="gemini-2.5-flash">Gemini 2.5 Flash (Recommended)</option>
+                        <option value="gemini-2.5-pro">Gemini 2.5 Pro (Thorough)</option>
+                        <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Theme Toggle and Controls -->
+            <div class="theme-toggle-container">
+                <button class="btn-secondary" id="clear-cache-btn" style="padding: 0.4rem 0.75rem; font-size: 0.75rem;">Clear History</button>
+                <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Light/Dark Mode" aria-label="Toggle light and dark themes">
+                    <!-- Moon Icon (Dark Mode active by default) -->
+                    <svg id="theme-icon-moon" style="width: 18px; height: 18px; fill: currentColor;" viewBox="0 0 24 24">
+                        <path d="M12 3c.132 0 .263 0 .393.007a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 3zm0 2a7 7 0 1 0 5.002 11.901A8.5 8.5 0 0 1 12 5z"/>
+                    </svg>
+                    <!-- Sun Icon (Hidden initially) -->
+                    <svg id="theme-icon-sun" style="width: 18px; height: 18px; fill: currentColor; display: none;" viewBox="0 0 24 24">
+                        <path d="M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0-7a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1zm0 15a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0v-2a1 1 0 0 1 1-1zm-8.485-8.485a1 1 0 0 1 1.414 0l1.414 1.414a1 1 0 1 1-1.414 1.414l-1.414-1.414a1 1 0 0 1 0-1.414zm11.314 11.314a1 1 0 0 1 1.414 0l1.414 1.414a1 1 0 0 1-1.414 1.414l-1.414-1.414a1 1 0 0 1 0-1.414zM2 12a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2H3a1 1 0 0 1-1-1zm15 0a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2h-2a1 1 0 0 1-1-1zM5.636 18.364a1 1 0 0 1 0-1.414l1.414-1.414a1 1 0 1 1 1.414 1.414l-1.414 1.414a1 1 0 0 1-1.414 0zm11.314-11.314a1 1 0 0 1 0-1.414l1.414-1.414a1 1 0 1 1 1.414 1.414l-1.414 1.414a1 1 0 0 1-1.414 0z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <main>
+        <!-- Header -->
+        <header>
+            <div>
+                <h2 style="font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px;">Brand Review Workspace</h2>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Synthesising clinical, literature, and commercial signals</p>
+            </div>
+            
+            <div class="header-meta">
+                <div class="api-status">
+                    <span class="status-indicator pulse" id="ct-indicator"></span>
+                    <span>ClinicalTrials</span>
+                </div>
+                <div class="api-status">
+                    <span class="status-indicator pulse" id="pm-indicator"></span>
+                    <span>PubMed</span>
+                </div>
+                <div class="api-status">
+                    <span class="status-indicator pulse" id="news-indicator"></span>
+                    <span>Google News</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Input Parameters Form Card -->
+        <section class="dashboard-card" id="form-section">
+            <h3 class="card-title">
+                <svg style="width: 20px; height: 20px; fill: var(--accent-emerald);" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/>
+                </svg>
+                Brand Intelligence Parameters
+            </h3>
+            
+            <form id="signals-form">
+                <div class="input-grid">
+                    <!-- Brand Name -->
+                    <div class="form-group">
+                        <label for="brand-name">Target Brand Name</label>
+                        <input type="text" id="brand-name" class="form-input" placeholder="e.g., Prevnar 20" required>
+                    </div>
+
+                    <!-- Therapy Area Dropdown -->
+                    <div class="form-group">
+                        <label for="therapy-area">Therapy Area</label>
+                        <select id="therapy-area" class="form-select">
+                            <option value="Vaccines">Vaccines</option>
+                            <option value="Oncology">Oncology</option>
+                            <option value="Cardiology">Cardiology</option>
+                            <option value="CNS">CNS / Neurology</option>
+                            <option value="Rare Disease">Rare Disease</option>
+                            <option value="Immunology">Immunology / Rheumatology</option>
+                            <option value="Diabetes">Diabetes / Endocrinology</option>
+                            <option value="Other">Other Therapy Area</option>
+                        </select>
+                    </div>
+
+                    <!-- Competitor List -->
+                    <div class="form-group full-width">
+                        <label>Competitors (Up to 3)</label>
+                        <div class="competitors-wrapper">
+                            <div class="competitors-input-container">
+                                <input type="text" id="competitor-input" class="form-input" placeholder="Type a competitor and press Add (e.g., Vaxneuvance)">
+                                <button type="button" class="btn-secondary" id="add-competitor-btn" style="padding: 0 1.5rem; height: 100%;">Add</button>
+                            </div>
+                            <div class="competitor-tags" id="competitor-tags-list">
+                                <!-- Competitor Tags injected here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Strategic Focus Question -->
+                    <div class="form-group full-width">
+                        <label for="strategic-question">Strategic Question (Optional)</label>
+                        <textarea id="strategic-question" class="form-textarea" rows="2" placeholder="e.g., Any competitor pipeline updates or safety trials in pneumococcal vaccines?"></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" id="generate-btn" style="width: 100%;">
+                    <svg style="width: 18px; height: 18px; fill: currentColor;" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                    </svg>
+                    Compile Competitive Intelligence Brief
+                </button>
+            </form>
+        </section>
+
+        <!-- Dynamic Live Logging Console -->
+        <section class="logger-card" id="console-logger">
+            <div class="logger-header">
+                <span>PHARMASIGNAL SIGNAL ACQUISITION LOGGER</span>
+                <span id="logger-status-text">RUNNING ACTIVE PIPELINES</span>
+            </div>
+            <div id="logger-rows-container">
+                <!-- Logger outputs dynamically loaded -->
+            </div>
+        </section>
+
+        <!-- Dynamic Tabbed Output Containers -->
+        <section class="results-container" id="results-section">
+            <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-target="brief-panel">Intelligence Brief</button>
+                    <button class="tab-btn" data-target="trials-panel">Competitor Pipelines</button>
+                    <button class="tab-btn" data-target="lit-panel">Therapy Literature</button>
+                    <button class="tab-btn" data-target="news-panel">Industry News</button>
+                    <button class="tab-btn" data-target="raw-panel">Raw Signals</button>
+                </div>
+                
+                <div class="tab-actions">
+                    <button class="btn-secondary" id="copy-brief-btn">
+                        <svg style="width: 14px; height: 14px; fill: currentColor;" viewBox="0 0 24 24">
+                            <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                        </svg>
+                        Copy
+                    </button>
+                    <button class="btn-secondary" id="download-brief-btn">
+                        <svg style="width: 14px; height: 14px; fill: currentColor;" viewBox="0 0 24 24">
+                            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+                        </svg>
+                        Download Brief
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab 1: Brief Rendering Paper -->
+            <div class="tab-panel active" id="brief-panel">
+                <div class="brief-paper" id="brief-content-target">
+                    <!-- Brief markup dynamically built -->
+                </div>
+            </div>
+
+            <!-- Tab 2: Clinical Trials Board -->
+            <div class="tab-panel" id="trials-panel">
+                <div class="trials-grid" id="trials-content-target">
+                    <!-- Trials injected -->
+                </div>
+            </div>
+
+            <!-- Tab 3: Literature Cite Cards -->
+            <div class="tab-panel" id="lit-panel">
+                <div class="lit-list" id="lit-content-target">
+                    <!-- Papers injected -->
+                </div>
+            </div>
+
+            <!-- Tab 4: Commercial News Grid -->
+            <div class="tab-panel" id="news-panel">
+                <div class="news-grid" id="news-content-target">
+                    <!-- News cards injected -->
+                </div>
+            </div>
+
+            <!-- Tab 5: Raw Signals Board -->
+            <div class="tab-panel id-raw-panel" id="raw-panel">
+                <div class="raw-context-panel">
+                    <pre><code id="raw-content-target">JSON signals appear here...</code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
