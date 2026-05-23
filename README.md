@@ -1,4 +1,4 @@
-# PharmaSignal 💊📊
+# PharmaSignal 
 > **AI-Powered Brand Intelligence Copilot for Pharma Commercial Teams**
 
 PharmaSignal is a lightweight, high-fidelity competitive intelligence dashboard designed specifically for pharmaceutical brand managers and sales force effectiveness (SFE) leads. It aggregates, structures, and synthesizes real-time competitive signals from **ClinicalTrials.gov**, **PubMed literature**, and **Google News** into a polished, executive-ready intelligence brief in under 60 seconds.
